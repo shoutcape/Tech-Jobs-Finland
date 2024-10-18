@@ -1,0 +1,153 @@
+import '../styles.css';
+import itDuunitService from '../services/itduunitfi';
+import { useEffect, useRef, useState } from 'react';
+import '../styles.css';
+import JobItem from './JobItem';
+import TagItem from './TagItem';
+import taglist from '../data/tags.json';
+
+//creates field interface for job objects
+export interface Job {
+  id: number;
+  heading: string;
+  short_heading: string;
+  date_posted: string;
+  date_created: string;
+  date_ends: string;
+  slug: string;
+  municipality_name: string;
+  export_image_url: string;
+  company_name: string;
+  descr: string;
+  latitude: number | null;
+  longitude: number | null;
+  area_name: string;
+  banner_url: string | null;
+  logo_url: string | null;
+  link: string;
+  apply_click_value: string;
+  main_category: string;
+  hours: string;
+  apply_url: string;
+  tag_names: string[];
+}
+
+type Tags = {
+  [category: string]: string[];
+};
+
+const Duunit: React.FC = () => {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+  const tags: Tags = taglist.tags;
+
+  //useRef variable to allow keeping state without new page render on each state change
+  const timer = useRef<NodeJS.Timeout | null>(null);
+
+  // fetch jobs from itduunit.fi api served by the backend
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const { allJobs } = await itDuunitService.getAll();
+      //after jobs have been fetched set state for filtered and unfiltered job lists
+      if (allJobs) {
+        setJobs(allJobs);
+        setFilteredJobs(allJobs);
+      }
+    };
+
+    fetchJobs();
+  }, []);
+
+  const handleSearch = (event: { target: { value: string } }) => {
+    // Allow clearing setTimeout functions current instance if there is an existing timer instance
+    if (timer.current) {
+      clearTimeout(timer.current);
+    }
+    timer.current = setTimeout(() => {
+      const filtered = jobs.filter((job) =>
+        job.heading.toLowerCase().includes(event.target.value.toLowerCase()),
+      );
+      setFilteredJobs(filtered);
+    }, 500);
+  };
+
+  const handleTags = (clickedTag: string) => {
+    if (activeTags.includes(clickedTag)) {
+      const updatedActiveTags = activeTags.filter((tag) => tag !== clickedTag);
+      setActiveTags(updatedActiveTags);
+    } else {
+      const updatedActiveTags = activeTags.concat(clickedTag);
+      setActiveTags(updatedActiveTags);
+    }
+  };
+
+  useEffect(() => {
+    // search for all jobs if there is no active tags
+      if (activeTags.length <= 0) {
+        setFilteredJobs(jobs);
+      } else {
+        const filtered = jobs.filter((job) =>
+          job.tag_names.some((tag) => activeTags.includes(tag)),
+        );
+        setFilteredJobs(filtered);
+      }
+  }, [jobs, activeTags]);
+
+  return (
+    <div>
+      <div className='job-tags'>
+        {
+          //create an array from tags example:[category, [tags]]
+          Object.entries(tags).map(([category, tags]) => (
+            <div className='job-tag-container' key={category}>
+              <h3>{category}</h3>
+              <ul>
+                {
+                  //map over current category tags
+                }
+                {tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className={
+                      activeTags.includes(tag)
+                        ? 'job-tag-active'
+                        : 'job-tag-inactive'
+                    }
+                    onClick={() => handleTags(tag)}
+                  >
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <div className='job-active-tags'>
+        {activeTags.map(tag => (
+          <p
+            onClick={() => handleTags(tag)}
+          >{tag}</p>
+        ))}
+      </div>
+      <div className='job-searchbar'>
+        <div className='job-searchInput'>
+          <label>Search</label>
+          <input onChange={handleSearch} />
+        </div>
+        {filteredJobs && (
+          <div className='job-count'>
+            <p>Jobs found: {filteredJobs.length}</p>
+          </div>
+        )}
+      </div>
+      <div className='job-container'>
+        {filteredJobs &&
+          filteredJobs.map((item: Job, index: number) => <JobItem key={index} job={item} />)}
+      </div>
+    </div>
+  );
+};
+
+export default Duunit;

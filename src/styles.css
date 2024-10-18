@@ -1,0 +1,253 @@
+.mainHeader {
+  display: flex;
+  justify-content: center;
+  font-size: 35px;
+  padding-bottom: 40px;
+}
+
+.job-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  width: 96%;
+  margin: auto;
+}
+
+.job-searchbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  font-size: 20px;
+  max-width: 1000px;
+  width: 96%;
+  margin: auto;
+  margin-top: 20px;
+}
+.job-searchInput {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  input {
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    outline: none;
+  }
+}
+
+.job-tags {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  user-select: none;
+  max-width: 1100px;
+  margin: auto;
+  gap: 20px;
+  text-wrap: wrap;
+
+  .job-tag-container {
+    display: flex;
+    width: 96%;
+    max-height: 300px;
+    max-width: 500px;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #303030 #212121;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
+    background: #303030;
+    box-shadow:
+      rgba(0, 0, 0, 0.9) 0px 4px 6px -1px,
+      rgba(0, 0, 0, 0.96) 0px 2px 4px -1px;
+  h3 {
+    background: #303030;
+    width: 100%;
+    text-wrap: wrap;
+    max-width: 200px;
+    position: sticky;
+    padding: 10px;
+    margin: 0px;
+    top: 0px;
+  }
+  ul {
+      display: flex;
+      flex-direction: column;
+      list-style-type: none;
+      line-height: 30px;
+      padding: 0px;
+      gap: 10px;
+    }
+  li {
+      padding: 5px 5px 5px 10px;
+      text-align: start;
+      background: #212121;
+      box-shadow:
+        rgba(0, 0, 0, 0.9) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.96) 0px 2px 4px -1px;
+    }
+  }
+}
+
+.job-active-tags {
+  margin: auto;
+  margin-block: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 800px;
+  justify-content: center;
+  gap: 10px;
+  p {
+      user-select: none;
+      text-wrap: nowrap;
+      border-radius: 10px;
+      padding: 7px;
+      background: #303030;
+      box-shadow:
+        rgba(0, 0, 0, 0.9) 0px 4px 6px -1px,
+        rgba(0, 0, 0, 0.96) 0px 2px 4px -1px;
+  }
+}
+.job-active-tags:hover {
+  cursor: pointer;
+}
+
+.job-tag-active {
+  display: none;
+}
+.job-tag-inactive {
+  color: none;
+}
+
+.job-tag-inactive:hover {
+  cursor: pointer;
+}
+
+
+.job-item {
+  flex-direction: column;
+  max-width: 1200px;
+  max-height: 120px;
+  background: #303030;
+  padding: 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow:
+    rgba(0, 0, 0, 0.9) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.96) 0px 2px 4px -1px;
+  a {
+    text-decoration: none;
+    color: #f1f1f1;
+  }
+}
+
+.job-item:hover {
+  transform: scale(1.02);
+  transition: 0.1s;
+}
+
+.job-heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+    text-wrap: wrap;
+  gap: 10px;
+  p:first-child {
+    font-size: 25px;
+  }
+  .job-desc {
+    padding-right: 20px;
+    padding-bottom: 20px;
+    text-wrap: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 15px;
+  }
+}
+
+.job-split {
+  display: flex;
+  justify-content: space-between;
+}
+
+.job-company {
+  height: 70px;
+  aspect-ratio: 8/3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 5px;
+  color: black;
+  font-size: 25px;
+  font-weight: 900;
+  background-color: white;
+
+  p {
+    margin: 0px;
+  }
+}
+
+.job-logo {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  border: 2px solid black;
+  padding: 5px;
+  background-color: white;
+
+  img {
+    height: inherit;
+    max-width: 400px;
+  }
+}
+
+body {
+  background: #212121;
+  color: #f1f1f1;
+  font-family: Roboto;
+}
+
+p {
+  margin: 0px;
+}
+
+@media (max-width: 700px) {
+.job-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.job-logo {
+  img {
+    max-width: 150px;
+  }
+}
+.job-item {
+    width: 100%;
+    margin: auto;
+    align-self:center
+  }
+.job-company {
+    height: 35px;
+    font-size: 20px;
+}
+.job-heading {
+  gap: 5px;
+
+  p {
+    font-size: 20px;
+  }
+}
+}

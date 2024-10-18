@@ -1,0 +1,149 @@
+{
+  "tags": {
+    "Roles and levels": [
+      "junior developer",
+      "senior developer",
+      "junior software developer",
+      "senior software developer",
+      "software developer",
+      "application developer",
+      "junior-tason tehtävät",
+      "entry level jobs",
+      "senior system specialist",
+      "senior systems specialist",
+      "it trainee",
+      "junior analyst",
+      "analyst trainee",
+      "assistant analyst",
+      "intern",
+      "harjoittelija",
+      "apprentice",
+      "software trainee",
+      "analyst"
+    ],
+    "Programming languages": [
+      "c",
+      "c#",
+      "c++",
+      "java",
+      "javascript",
+      "kotlin",
+      "python",
+      "typescript",
+      "swift",
+      "rust",
+      "scala",
+      "ruby",
+      "php",
+      "r",
+      "go"
+    ],
+    "Frontend development": [
+      "frontend developer",
+      "front end -kehittäjä",
+      "frontend-kehittäjä",
+      "react",
+      "vue.js",
+      "angular",
+      "css",
+      "html"
+    ],
+    "Backend development": [
+      "backend developer",
+      "back end developer",
+      "backend-kehittäjä",
+      "fullstack developer",
+      "full stack -kehittäjä",
+      "fullstack - talented",
+      "node.js",
+      "django",
+      "spring",
+      "spring framework",
+      "graphql"
+    ],
+    "Cloud and DevOps": [
+      "aws",
+      "gcp",
+      "azure",
+      "devops",
+      "devops-kehittäjä",
+      "devops specialist",
+      "terraform",
+      "docker",
+      "kubernetes",
+      "cloud architect",
+      "pilviasiantuntija"
+    ],
+    "Databases": [
+      "sql",
+      "nosql",
+      "mysql",
+      "postgresql",
+      "mongodb",
+      "redis",
+      "data warehouses"
+    ],
+    "Tools and development environments": [
+      "git",
+      "jenkins",
+      "docker",
+      "ci",
+      "cd",
+      "terraform",
+      "bash",
+      "ansible",
+      "serverless"
+    ],
+    "Testing and quality assurance": [
+      "qa",
+      "quality assurance",
+      "test automation",
+      "test automation engineer",
+      "test automation developer",
+      "testing specialist",
+      "senior test engineer",
+      "cypress",
+      "robot framework"
+    ],
+    "Design and UI/UX": [
+      "ux designer",
+      "ui designer",
+      "ui/ux designer",
+      "visual designer",
+      "figma",
+      "user experience designer",
+      "ux specialist",
+      "service design"
+    ],
+    "Data and analytics": [
+      "data analyst",
+      "data engineer",
+      "data scientist",
+      "data management specialist",
+      "big data specialist",
+      "power bi",
+      "tableau",
+      "data architect",
+      "machine learning",
+      "machine learning developer"
+    ],
+    "Architecture and management": [
+      "software architect",
+      "solution architect",
+      "lead architect",
+      "application architect",
+      "sw architect",
+      "project manager",
+      "product manager"
+    ],
+    "Employment type and location": [
+      "vakituinen työsuhde",
+      "kokoaikainen",
+      "osa-aikainen",
+      "määräaikainen",
+      "remote work",
+      "hybrid work"
+    ]
+  }
+}
+
