@@ -9,7 +9,7 @@ type Tags = {
   [category: string]: string[];
 };
 
-const TagItem: React.FC<TagItemProps> = ({activeTags, handleTags}) => {
+const TagLists: React.FC<TagItemProps> = ({activeTags, handleTags}) => {
   const tags: Tags = taglist.tags;
   return (
       <div className='job-tags'>
@@ -43,4 +43,4 @@ const TagItem: React.FC<TagItemProps> = ({activeTags, handleTags}) => {
   )
 };
 
-export default TagItem;
+export default TagLists;

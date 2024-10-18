@@ -1,4 +1,4 @@
-import { Job } from './Duunit';
+import { Job } from '../App';
 
 interface JobItemProps {
   job: Job;
