@@ -34,6 +34,7 @@ const App = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [activeTags, setActiveTags] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true)
 
   //useRef variable to allow keeping state without new page render on each state change
   const timer = useRef<NodeJS.Timeout | null>(null);
@@ -50,6 +51,7 @@ const App = () => {
         if (currentTags) {
           const parsedTags: string[] = JSON.parse(currentTags);
           setActiveTags(parsedTags)
+          setLoading(false)
         }
       }
     };
@@ -98,6 +100,7 @@ const App = () => {
   return (
     <>
     <h1 className='mainHeading'>Tech Jobs Finland</h1>
+    <h2 className='header'>Created by <a href='https://github.com/shoutcape'>Ville Kautiainen</a></h2>
     <div>
       <TagLists activeTags={activeTags} handleTags={handleTags}/>
       <div className='job-active-tags'>
@@ -119,6 +122,9 @@ const App = () => {
           </div>
         )}
       </div>
+        {loading  &&
+          <div className='spinner'></div>
+        }
       <div className='job-container'>
         {filteredJobs &&
           filteredJobs.map((item: Job, index: number) => <JobItem key={index} job={item} />)}

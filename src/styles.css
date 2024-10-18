@@ -5,6 +5,48 @@
   padding-bottom: 40px;
 }
 
+.spinner {
+  justify-content: center;
+  align-self: center;
+  width: 54px;
+  height: 54px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.spinner::after {
+  /*empty content for it to exist*/
+  content: "";
+  display: block;
+  /*define size*/
+  height: 54px;
+  width: 54px;
+  /*define shape*/
+  border-radius: 50%;
+  border:6px solid;
+  /*make parts of border transparent*/
+  border-color: currentColor transparent currentColor transparent;
+  animation: spinner 2s linear infinite;
+}
+
+@keyframes spinner {
+  from {
+  transform: rotate(0deg);
+}
+  to {
+  transform: rotate(360deg);
+}
+}
+
+
+.header {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 20px;
+  font-style: italic;
+}
+
 .job-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
