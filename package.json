@@ -1,5 +1,5 @@
 {
-  "name": "tyopaikkahaku",
+  "name": "tech-jobs-finland",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,7 +14,8 @@
     "puppeteer": "^23.6.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "styled-components": "^6.1.13"
+    "styled-components": "^6.1.13",
+    "ws": "^8.18.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",

@@ -34,39 +34,50 @@ const App = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [activeTags, setActiveTags] = useState<string[]>([]);
+  const [jobCount, setJobCount] = useState<number|null>(null)
 
   //useRef variable to allow keeping state without new page render on each state change
   const timer = useRef<NodeJS.Timeout | null>(null);
 
   // fetch jobs from itduunit.fi api served by the backend
   useEffect(() => {
+    let loadMoreJobs = true;
+    let pageNumber = 0;
     const fetchJobs = async () => {
-      const { allJobs } = await itDuunitService.getAll();
-      //after jobs have been fetched set state for filtered and unfiltered job lists
-      if (allJobs) {
-        setJobs(allJobs);
-        setFilteredJobs(allJobs);
-        const currentTags = localStorage.getItem('currentTags')
-        if (currentTags) {
-          const parsedTags: string[] = JSON.parse(currentTags);
-          setActiveTags(parsedTags)
+      while (loadMoreJobs) {
+        pageNumber++;
+        const { fetchedJobs, next, count } =
+          await itDuunitService.getBatch(pageNumber);
+        if (fetchedJobs) {
+          setJobs((prevJobs) => [...prevJobs, ...fetchedJobs]);
+          setFilteredJobs((prevJobs) => [...prevJobs, ...fetchedJobs]);
+          setJobCount(count)
+          if (next == false) {
+            loadMoreJobs = false;
+          }
         }
       }
+      //after jobs have been fetched set state for filtered and unfiltered job lists
     };
 
+    const currentTags = localStorage.getItem('currentTags');
+    if (currentTags) {
+      const parsedTags: string[] = JSON.parse(currentTags);
+      setActiveTags(parsedTags);
+    }
     fetchJobs();
   }, []);
 
   useEffect(() => {
     // search for all jobs if there is no active tags
-      if (activeTags.length <= 0) {
-        setFilteredJobs(jobs);
-      } else {
-        const filtered = jobs.filter((job) =>
-          job.tag_names.some((tag) => activeTags.includes(tag)),
-        );
-        setFilteredJobs(filtered);
-      }
+    if (activeTags.length <= 0) {
+      setFilteredJobs(jobs);
+    } else {
+      const filtered = jobs.filter((job) =>
+        job.tag_names.some((tag) => activeTags.includes(tag)),
+      );
+      setFilteredJobs(filtered);
+    }
   }, [jobs, activeTags]);
 
   const handleSearch = (event: { target: { value: string } }) => {
@@ -86,47 +97,45 @@ const App = () => {
     if (activeTags.includes(clickedTag)) {
       const updatedActiveTags = activeTags.filter((tag) => tag !== clickedTag);
       setActiveTags(updatedActiveTags);
-      localStorage.setItem('currentTags', JSON.stringify(updatedActiveTags))
+      localStorage.setItem('currentTags', JSON.stringify(updatedActiveTags));
     } else {
       const updatedActiveTags = activeTags.concat(clickedTag);
       setActiveTags(updatedActiveTags);
-      localStorage.setItem('currentTags', JSON.stringify(updatedActiveTags))
+      localStorage.setItem('currentTags', JSON.stringify(updatedActiveTags));
     }
   };
 
   return (
     <>
-    <h1 className='mainHeading'>Tech Jobs Finland</h1>
-    <h2 className='header'>Created by <a href='https://github.com/shoutcape'>Ville Kautiainen</a></h2>
-    <div>
-      <TagLists activeTags={activeTags} handleTags={handleTags}/>
-      <div className='job-active-tags'>
-        {activeTags.map((tag, index) => (
-          <p
-            key={index}
-            onClick={() => handleTags(tag)}
-          >{tag}</p>
-        ))}
-      </div>
-      <div className='job-searchbar'>
-        <div className='job-searchInput'>
-          <label>Search</label>
-          <input onChange={handleSearch} />
+      <h1 className='mainHeading'>Tech Jobs Finland</h1>
+      <h2 className='header'>
+        Created by <a href='https://github.com/shoutcape'>Ville Kautiainen</a>
+      </h2>
+      <div>
+        <TagLists activeTags={activeTags} handleTags={handleTags} />
+        <div className='job-active-tags'>
+          {activeTags.map((tag, index) => (
+            <p key={index} onClick={() => handleTags(tag)}>
+              {tag}
+            </p>
+          ))}
         </div>
-        {filteredJobs && (
-          <div className='job-count'>
-            <p>Jobs found: {filteredJobs.length}</p>
+        <div className='job-searchbar'>
+          <div className='job-searchInput'>
+            <label>Search</label>
+            <input onChange={handleSearch} />
           </div>
-        )}
+            <div>
+              <p>Jobs found: {jobCount}</p>
+            </div>
+        </div>
+        <div className='job-container'>
+          {filteredJobs &&
+            filteredJobs.map((item: Job, index: number) => (
+              <JobItem key={index} job={item} />
+            ))}
+        </div>
       </div>
-        {jobs.length == 0   &&
-          <div className='spinner'></div>
-        }
-      <div className='job-container'>
-        {filteredJobs &&
-          filteredJobs.map((item: Job, index: number) => <JobItem key={index} job={item} />)}
-      </div>
-    </div>
     </>
   );
 };
