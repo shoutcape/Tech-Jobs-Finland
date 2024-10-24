@@ -48,16 +48,19 @@ const App = () => {
         pageNumber++;
         const { fetchedJobs, next, count } =
           await itDuunitService.getBatch(pageNumber);
+
+        if (pageNumber == 1) {
+          setJobCount(count)
+        }
         if (fetchedJobs) {
+          //after jobs have been fetched set state for filtered and unfiltered job lists
           setJobs((prevJobs) => [...prevJobs, ...fetchedJobs]);
           setFilteredJobs((prevJobs) => [...prevJobs, ...fetchedJobs]);
-          setJobCount(count)
           if (!next) {
             loadMoreJobs = false;
           }
         }
       }
-      //after jobs have been fetched set state for filtered and unfiltered job lists
     };
 
     const currentTags = localStorage.getItem('currentTags');
@@ -90,6 +93,7 @@ const App = () => {
         job.heading.toLowerCase().includes(event.target.value.toLowerCase()),
       );
       setFilteredJobs(filtered);
+      setJobCount(filtered.length)
     }, 500);
   };
 
