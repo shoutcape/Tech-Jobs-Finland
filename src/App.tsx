@@ -52,7 +52,7 @@ const App = () => {
           setJobs((prevJobs) => [...prevJobs, ...fetchedJobs]);
           setFilteredJobs((prevJobs) => [...prevJobs, ...fetchedJobs]);
           setJobCount(count)
-          if (next == false) {
+          if (!next) {
             loadMoreJobs = false;
           }
         }
