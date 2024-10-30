@@ -1,7 +1,7 @@
 # Tech Jobs Finland
 
 ## Overview
-Alternate way to browsing job listings published on duunitori.fi in their entirety based on tags and search.
+This app uses the duunitori.fi api to get all open job listings from itduunit.fi website for easier and faster viewing experience
 
 ## Link
 https://tech-jobs-finland.netlify.app/
