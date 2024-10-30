@@ -6,7 +6,7 @@ html, body {
 .mainHeading {
   display: flex;
   justify-content: center;
-  font-size: 35px;
+  font-size: 2rem;
   padding-bottom: 40px;
 }
 
@@ -14,7 +14,7 @@ html, body {
   display: inline-flex;
   gap: 1rem;
   p {
-    padding: 5px;
+    padding: 0.3rem;
   }
 }
 
@@ -57,18 +57,18 @@ html, body {
   display: flex;
   justify-content: center;
   gap: 10px;
-  font-size: 20px;
+  font-size: 1.2rem;
   font-style: italic;
 }
 
 .job-container {
   display: grid;
+  margin-block: 3rem;
   grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
   align-items: center;
   justify-self: center;
-  row-gap: 20px;
-  padding: 20px;
-  max-width: 96%;
+  row-gap: 2rem;
+  max-width: 95%;
 }
 
 .job-searchbar {
@@ -77,8 +77,7 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 40px;
-  font-size: 20px;
-  max-width: 1000px;
+  font-size: 1rem;
   max-width: 95%;
   margin: auto;
   margin-top: 20px;
@@ -97,15 +96,11 @@ html, body {
 
 .job-item {
   flex-direction: column;
-  justify-self: center;
-  max-height: 120px;
+  height: 100%;
   max-width: 95%;
   background: #303030;
-  padding: 10px;
+  padding: 10px 10px 0px 10px ;
   border-radius: 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   box-shadow:
     rgba(0, 0, 0, 0.9) 0px 4px 6px -1px,
     rgba(0, 0, 0, 0.96) 0px 2px 4px -1px;
@@ -128,21 +123,40 @@ html, body {
     text-wrap: wrap;
   gap: 10px;
   p:first-child {
-    font-size: 25px;
+    font-size: 1.3rem;
   }
   .job-desc {
     padding-right: 20px;
-    padding-bottom: 20px;
     text-wrap: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 15px;
+    font-size: 0.9rem;
   }
 }
 
 .job-split {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width:600px) {
+  .job-split {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .job-company {
+    max-height: 3rem;
+    height: 10rem;
+  }
+  .job-logo {
+    width: 10rem;
+    height: 10rem;
+    img {
+      height: 10rem;
+      width: 10rem;
+    }
+  }
 }
 
 .job-company {
@@ -155,13 +169,9 @@ html, body {
   border: 2px solid black;
   padding: 5px;
   color: black;
-  font-size: 25px;
+  font-size: 1.6rem;
   font-weight: 900;
   background-color: white;
-
-  p {
-    margin: 0px;
-  }
 }
 
 .job-logo {
@@ -172,11 +182,12 @@ html, body {
   border: 2px solid black;
   padding: 5px;
   background-color: white;
+  max-width: 20rem;
+}
 
-  img {
-    height: inherit;
-    max-width: 400px;
-  }
+img {
+  height: inherit;
+  max-width: 20rem;
 }
 
 body {
@@ -193,27 +204,41 @@ p {
 .job-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
 }
 .job-logo {
-  img {
-    max-width: 150px;
-  }
-}
-.job-item {
-    width: 100%;
-    margin: auto;
-    align-self:center
-  }
-.job-company {
-    height: 35px;
-    font-size: 20px;
-}
-.job-heading {
-  gap: 5px;
+  justify-self: center;
+  width: 95%;
+  margin-bottom: 1rem;
 
-  p {
-    font-size: 20px;
+  img {
+    height: inherit;
+    width: 95%;
   }
 }
+}
+
+body {
+  font-size: 16px;
+}
+
+/* Pienet näytöt (esim. puhelimet) */
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Keskikokoiset näytöt (esim. tabletit) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+/* Suuret näytöt (esim. tietokoneet) */
+@media (min-width: 1025px) {
+  body {
+    font-size: 18px;
+  }
 }
