@@ -64,11 +64,12 @@ html, body {
 .job-container {
   display: grid;
   margin-block: 3rem;
-  grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(50rem, 1fr));
   align-items: center;
   justify-self: center;
   row-gap: 2rem;
-  max-width: 95%;
+  width: 95%;
+  max-width: 100rem;
 }
 
 .job-searchbar {
